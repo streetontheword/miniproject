@@ -25,8 +25,22 @@ public class HealthappService {
         petRepo.savePets(username, name, pet);
     }
 
-    public Pet getIndividualPet(String petName){
-        return petRepo.getPetByName(petName);
+
+    //to get individual pets by their name 
+    public Pet getIndividualPet(String userName, String petName){
+        return petRepo.getPetByName(userName, petName);
+    }
+
+
+    public Boolean deletePet(String userName, String petName){
+        Boolean result = false; 
+        if (petRepo.delete(userName, petName)){
+        result = true; 
+        System.out.println("deleted pet = " + result); //not so sure if i need this 
+        } 
+        
+        return result; 
     }
     
+
 }

@@ -10,14 +10,16 @@
    
     <form data-th-object="${pet}">
     
-    <div data-th-if="${#lists.isEmpty(retrievedpets)}"></div>
-		<div>
-            <h1>Welcome to your pet's health booklet</h1>
-			<p>Please click <a th:href="@{/pets/add}">here </a> to start your pet's entry</p>
-            
-		</div>
-       
-		<div data-th-unless="${#lists.isEmpty(retrievedpets)}">
+    <h1>Welcome to your pet's health booklet</h1>
+
+    <div data-th-if="${#lists.isEmpty(retrievedpets)}">
+            <p>Oh no! Your Pet's health booklet is empty</p>
+			<p>Please click <a th:href="@{/pets/add}">here </a> to start your furkid's entry</p>
+    </div>
+
+	<div data-th-if="${not#lists.isEmpty(retrievedpets)}">
+            <p>Welcome back!</p>
+            <p>Please click <a th:href="@{/pets/add}">here </a> to add another furkid entry</p>
 			<table border="1">
 				<thead>
 					<tr>
@@ -31,7 +33,9 @@
 						<td> <span data-th-text="${pet.name}"></span> </td>
 						<td> <span data-th-text="${pet.breed}"></span> </td>
                         <td>
-                            <a th:href="@{/pets/{name}(name=${pet.name})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/pets/petupdate/{name}(name=${pet.name})}" class="btn btn-primary">Edit</a>
+                            <a th:href="@{/pets/petdelete/{name}(name=${pet.name})}" class="btn btn-danger"> Delete </a>
+                            
                         </td>
 					</tr>
 				</tbody>

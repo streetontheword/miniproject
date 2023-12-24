@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -27,6 +28,7 @@ public class Pet {
 
     private String gender; 
 
+   
     private String breed;
 
     private Integer age;

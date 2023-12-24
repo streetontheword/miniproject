@@ -39,11 +39,21 @@ public class PetRepo {
 
     }
     
-    public Pet getPetByName(String petName){
+    //getting indiv pet info by their name 
+    public Pet getPetByName(String userName, String petName){
         HashOperations<String, String, Pet> hashOps = template.opsForHash();
         Pet pet = new Pet(); 
-        pet = hashOps.get(pet.getName(), pet);
+        pet = hashOps.get(userName, petName);
         return pet; 
+    }
+
+    public Boolean delete(String userName, String petName){
+        Boolean result = false; 
+        HashOperations<String, String, Pet> hashOps = template.opsForHash();
+
+        hashOps.delete(userName, petName);
+         result = true; 
+         return result;  
     }
 
 }

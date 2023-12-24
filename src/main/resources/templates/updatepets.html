@@ -7,7 +7,7 @@
     <title>Pet's information</title>
 </head>
 <body>
-    <h1> Pet's Health Booklet </h1>
+    <h1> Update Pet's Record </h1>
     <form method="POST" th:object="${pet}"> 
 
     <div class="mb-3">
@@ -41,8 +41,8 @@
         <div class="mb-3">
             <label for="breed" class="form-label">Breed of dog</label>
             <select id="breed" name="breed">
-        <option ></option>
-        <option th:each="b: ${listofdogbreeds}" data-th-value="${b}" data-th-text="${b}"> </option>
+        <option></option>
+        <option th:each="b: ${listofdogbreeds}" data-th-value="${b}" data-th-text="${b}" > </option>
         </select>
     </div>
     
@@ -82,7 +82,8 @@
         <br>
         </div>
 
-        <button type="submit" formaction="/pets/postInfo"> Save Record </button>
+        <button type="submit" formaction="/pets/postInfo"> Update Record </button>
+        <button type="submit" formaction="/pets/postInfo"> Cancel </button>
     </form>
 </body>
 </html>

@@ -32,25 +32,26 @@ public class FirstController {
     @GetMapping(path = "/")
     public String homePage(Model m) {
         List<Weather> listOfWeather = weatherSvc.getWeather();
+         
         m.addAttribute("listofweather", listOfWeather);
+        
        
         return "landingpage";
     }
 
     //to give weather
-    @PostMapping("/here")
+    @PostMapping("/weather")
     public String getForecast(@RequestBody MultiValueMap<String, String> body,  Model m) {
         //System.out.println(body);
         // body.getFirst("area");
 
         String weather = body.getFirst("area");
-       
         System.out.println(weather);
-    
+
         List<Weather> listOfWeather = weatherSvc.getWeather();
         m.addAttribute("forecast", weather);
         m.addAttribute("listofweather", listOfWeather);
-        
+       
 
         return "landingpage";
     }

@@ -54,7 +54,7 @@ public class PetController {
 
         String humanName = (String) sess.getAttribute("username");
         healthAppSvc.savePets(humanName, pet.getName(), pet);
-        
+
         m.addAttribute("pet", pet);
 
         return "redirect:/pets?name=" + humanName;
@@ -62,12 +62,37 @@ public class PetController {
     }
 
     @GetMapping("/{name}")
-    public String retrieveIndividualPets(@PathVariable("name") String name, HttpSession sess, Model m){
-        Pet pet = new Pet(); 
+    public String retrieveIndividualPets(@PathVariable("name") String name, HttpSession sess, Model m) {
+        Pet pet = new Pet();
         m.addAttribute("pet", pet);
         String humanName = (String) sess.getAttribute("username");
-        m.addAttribute("petrecord", healthAppSvc.getIndividualPet(name));
+        m.addAttribute("petrecord", healthAppSvc.getIndividualPet(humanName, name));
         return "individualpets";
     }
+
+
+    @GetMapping("/petdelete/{name}")
+    public String deletePetEntry(@PathVariable("name") String name, HttpSession sess) {
+
+        String humanName = (String) sess.getAttribute("username");
+        healthAppSvc.deletePet(humanName, name);
+
+        return "redirect:/pets?name=" + humanName;
+    }
+
+
+    @GetMapping("/petupdate/{name}")
+    public String updateEntry(@PathVariable("name") String name, Model m, HttpSession sess){
+        String humanName = (String) sess.getAttribute("username");
+        Pet pet = healthAppSvc.getIndividualPet(humanName, name);
+        List<String> dogBreeds = dogSvc.getDogBreeds();
+
+        m.addAttribute("pet", pet);
+        m.addAttribute("listofdogbreeds", dogBreeds);
+
+        return "updatepets";
+
+    }
+   
 
 }
