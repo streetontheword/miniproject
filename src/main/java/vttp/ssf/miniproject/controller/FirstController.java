@@ -7,12 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpSession;
+import vttp.ssf.miniproject.model.Pet;
 import vttp.ssf.miniproject.model.Weather;
+import vttp.ssf.miniproject.service.HealthappService;
 import vttp.ssf.miniproject.service.WeatherService;
 
 @Controller
@@ -22,6 +26,9 @@ public class FirstController {
     @Autowired
     WeatherService weatherSvc;
 
+    @Autowired HealthappService healthAppSvc; 
+   
+
     @GetMapping(path = "/")
     public String homePage(Model m) {
         List<Weather> listOfWeather = weatherSvc.getWeather();
@@ -30,10 +37,12 @@ public class FirstController {
         return "landingpage";
     }
 
+    //to give weather
     @PostMapping("/here")
     public String getForecast(@RequestBody MultiValueMap<String, String> body,  Model m) {
-        // System.out.println(body);
+        //System.out.println(body);
         // body.getFirst("area");
+
         String weather = body.getFirst("area");
        
         System.out.println(weather);
@@ -45,5 +54,20 @@ public class FirstController {
 
         return "landingpage";
     }
+
+    //@PostMapping path variables 
+
+    @GetMapping(path="/pets")
+    public String getPets(@RequestParam String name, Model m, HttpSession sess){
+        //System.out.println(body);
+        Pet newPet = new Pet(); 
+        List<Pet> listOfPets = healthAppSvc.getPets(name);
+        sess.setAttribute("username", name);  //key is username, value is name 
+        m.addAttribute("retrievedpets", listOfPets);
+        m.addAttribute("pet", newPet);
+        return "pageofpets";
+    }
+
+
 
 }

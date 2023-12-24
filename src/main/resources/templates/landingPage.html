@@ -12,7 +12,8 @@
         <label for="searchWeather" class="form-label">Area</label>
         <select id="area" name="area">
          <option></option>   
-        <option th:each="w: ${listofweather}" th:value="${w.forecast}" data-th-text="${w.area}"></option>
+        
+        <option th:each="w: ${listofweather}" th:value="${w.area} + ',' + ${w.forecast}" data-th-text="${w.area}" data-th-selected="${#strings.equals(w.area, option)}"></option>
         </select>  
     </div>
 
@@ -25,5 +26,15 @@
     </div>
    
 </form> 
+
+
+<form method="GET"> 
+    <div>
+        <label for="login" class="form-label">Please enter your name</label>
+        <input type="text" name="name" placeholder="Your name"> 
+        <button type="submit" formaction="/pets"> Login </button>
+    </div>
+
+</form>
 </body>
 </html>

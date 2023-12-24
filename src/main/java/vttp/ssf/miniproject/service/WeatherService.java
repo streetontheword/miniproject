@@ -62,7 +62,6 @@ public class WeatherService {
 
         }
 
-
         return listOfWeather; 
     }
 }
