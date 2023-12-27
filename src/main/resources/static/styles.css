@@ -1,52 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 
-*{
-    margin: 0; 
-    padding: 0; 
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
 
 body {
-   
-    background-color: blanchedalmond;
+
+    background: blanchedalmond;
+    background-size: contain;
+    background-position: center;
     min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    margin: 20px;
+
+
+}
+
+
+.weather .area-select {
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 5px;
+    height: 30px;
+}
+
+.weather .btn {
+    width: 50%;
+    border-radius: 10px;
+    background: peru;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    height: 30px;
+    cursor: pointer;
+
+}
+
+.weather .btn:active {
     
+    background: #e5e5e5;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+    outline: none;
     
 }
 
-.wrapper {
+
+
+.login {
     width: 420px;
     background: transparent;
     color: peru;
     border-radius: 10px;
     padding: 30px 40px;
-    position: relative; 
-    margin-left: auto; 
-    margin-right: auto; 
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
     top: 300px;
     width: 400px;
-   
-    
-    
+
+
 }
 
-.wrapper h1{
+.login h1 {
     font-size: 36px;
     text-align: center;
 
 }
 
-.wrapper .input-box{
+.login .input-box {
     position: relative;
     width: 100%;
     height: 50px;
     margin: 30px 0;
-    
+
 }
 
-.input-box input{
+.input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -59,7 +94,7 @@ body {
     padding: 20px 45px 20px 20px;
 }
 
-.input-box input::placeholder{
+.input-box input::placeholder {
     color: black;
 }
 
@@ -71,19 +106,19 @@ body {
     font-size: 20px;
 }
 
-.wrapper .btn{
+.login .btn {
     width: 100%;
     height: 45px;
     background: peru;
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0,0,0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
     font-size: 16px;
     color: #333;
     font-weight: 600;
-    
+
 }
 
 .weather {
@@ -91,3 +126,84 @@ body {
     padding: 20px;
 
 }
+
+/* this is for the page of pets styling*/
+.containerwithentry {
+    width: 100%;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.containerwithentry ul {
+    padding: 0px;
+    margin: px;
+
+}
+
+.containerwithentry ul li {
+    list-style: none;
+    float: left;
+    width: 20%;
+    height: 300px;
+    background-color: peru;
+    margin: 40px 40px 0px 55px;
+
+}
+
+
+/* for page of petsinfo */
+.form-control {
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.form-select {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+textarea {
+    width: 25%;
+    resize: vertical;
+    padding: 15px;
+    border-radius: 15px;
+    border: 0;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    height: 100px;
+    margin: 5px;
+}
+
+.petform h1 {}
+
+.petform .btn {
+    width: 15%;
+    height: 45px;
+    background: peru;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.petform .btn-danger {
+    width: 15%;
+    height: 45px;
+    background-color: maroon;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+}
+
+
+

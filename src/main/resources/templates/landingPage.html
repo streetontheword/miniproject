@@ -15,10 +15,11 @@
 
         <form method="POST">
             <div class="mb-3">
-                <label for="searchWeather" class="form-label">Area</label>
-                <select id="area" name="area">
+                <h2>Will it be raining cats and dogs?</h2>
+                <label for="searchWeather" class="form-label">Area:</label>
+                <select id="area" name="area" class="area-select">
 
-                    <option></option>
+                    <option>Choose an area...</option>
                     <option th:each="w: ${listofweather}" th:value="${w.area} + ',' + ${w.forecast}"
                         data-th-text="${w.area}" th:selected="${#strings.equals(lastselected, w.area)}">
 
@@ -26,7 +27,7 @@
                 </select>
             </div>
 
-            <button type="submit" formaction="/weather"> Get today's forecast</button>
+            <button type="submit" class="btn" formaction="/weather"> Click here to find out!</button>
 
             <div class="weather-result">
 
@@ -35,8 +36,8 @@
             </div>
         </form>
     </div>
-
-    <div class="wrapper">
+    
+    <div class="login">
         <form method="GET">
             <h1>Login</h1>
             <div class="input-box">

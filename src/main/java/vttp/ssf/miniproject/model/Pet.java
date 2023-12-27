@@ -37,24 +37,29 @@ public class Pet {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfVaccination;
 
+     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateOfNextVaccination;
+
     private String lastGroomedDate;
+
+    private String nextGroomedDate;
 
     private String allergies;
 
     private String comments; 
 
 
-    
-    
-    public Pet(
-             String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, String lastGroomedDate,String allergies, String comments) {
+
+    public Pet(String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, Date dateOfNextVaccination, String lastGroomedDate,String nextGroomedDate,String allergies, String comments) {
         this.name = name;
         this.microChipNumber = microChipNumber;
         this.dateOfBirth = dateOfBirth;
         this.breed = breed;
         this.age = age;
         this.dateOfVaccination = dateOfVaccination;
+        this.dateOfNextVaccination = dateOfNextVaccination;
         this.lastGroomedDate = lastGroomedDate;
+        this.nextGroomedDate = nextGroomedDate;
         this.allergies = allergies;
         this.comments = comments;
     }
@@ -140,15 +145,6 @@ public class Pet {
         this.comments = comments;
     }
 
-
-    @Override
-    public String toString() {
-        return "Pet [name=" + name + ", microChipNumber=" + microChipNumber + ", dateOfBirth=" + dateOfBirth
-                + ", breed=" + breed + ", age=" + age + ", dateOfVaccination=" + dateOfVaccination
-                + ", lastGroomedDate=" + lastGroomedDate + ", allergies=" + allergies + ", comments=" + comments + "]";
-    }
-
-
     public String getGender() {
         return gender;
     }
@@ -160,5 +156,32 @@ public class Pet {
 
 
     
+
+     public Date getDateOfNextVaccination() {
+        return dateOfNextVaccination;
+    }
+
+
+    public void setDateOfNextVaccination(Date dateOfNextVaccination) {
+        this.dateOfNextVaccination = dateOfNextVaccination;
+    }
+
+
+    public String getNextGroomedDate() {
+        return nextGroomedDate;
+    }
+
+
+    public void setNextGroomedDate(String nextGroomedDate) {
+        this.nextGroomedDate = nextGroomedDate;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Pet [name=" + name + ", microChipNumber=" + microChipNumber + ", dateOfBirth=" + dateOfBirth
+                + ", breed=" + breed + ", age=" + age + ", dateOfVaccination=" + dateOfVaccination
+                + ", lastGroomedDate=" + lastGroomedDate + ", allergies=" + allergies + ", comments=" + comments + "]";
+    }
     
 }
