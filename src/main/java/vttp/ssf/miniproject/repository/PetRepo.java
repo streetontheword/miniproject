@@ -2,6 +2,7 @@ package vttp.ssf.miniproject.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,9 +34,9 @@ public class PetRepo {
 
     }
 
-    public void savePets(String username, String name, Pet pet){
+    public void savePets(String username, String id, Pet pet){
         HashOperations<String, String, Pet> hashOps = template.opsForHash();
-        hashOps.put(username, pet.getName(), pet);
+        hashOps.put(username, id, pet);
 
     }
     
@@ -47,13 +48,19 @@ public class PetRepo {
         return pet; 
     }
 
-    public Boolean delete(String userName, String petName){
+    public Boolean delete(String userName, String id){
         Boolean result = false; 
         HashOperations<String, String, Pet> hashOps = template.opsForHash();
 
-        hashOps.delete(userName, petName);
+        hashOps.delete(userName, id);
          result = true; 
          return result;  
+    }
+
+    public Map<Object, Object> getAllPets(String username){
+        Map<Object, Object> map = template.opsForHash().entries(username);
+        System.out.println(map);
+        return map;
     }
 
 }

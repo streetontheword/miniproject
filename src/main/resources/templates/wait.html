@@ -97,3 +97,12 @@
     </div>
         <button type="submit" formaction="/pets/postInfo"> Save Record </button>
     </form>
+
+
+
+    <ul data-th-each="pet: ${retrievedpets}">
+        <li><span data-th-text="${pet.name}"></span>
+            <br>
+            <a th:href="@{/pets/petupdate/{name}(name=${pet.name})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{/pets/petdelete/{name}(name=${pet.name})}" class="btn btn-danger"> Delete </a></li>
+    </ul>

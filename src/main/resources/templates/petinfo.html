@@ -42,6 +42,9 @@
                 <label for="dateOfVaccination" class="form-label"> Next Vaccination Date</label>
                 <input type="date" class="form-control" name="dateOfNextVaccination" th:field="*{dateOfNextVaccination}"
                     aria-describedby="dateOfNextVaccinationHelp" />
+                    <div id="thumbwrap">
+                        <a class="thumb" >Suggested Vaccination Timeline<span><img src="/images/vaccinationpicture.jpg" width="400" height="300" alt="timeline of vaccination"></span></a>
+                </div>
                 <div id="dateOfNextVaccinationHelp" class="form-text">Please enter a future date</div>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('dateOfNextVaccination')}"
                     th:errors="*{dateOfNextVaccination}"></div>
@@ -88,9 +91,11 @@
                 <div class="col">
                     <label for="breed" class="form-label">Breed of dog</label>
                     <select id="breed" name="breed" class="form-select">
-                        <option selected>Choose...</option>
-                <option th:each="b: ${listofdogbreeds}" data-th-value="${b}" data-th-text="${b}"> </option>
+                <option th:each="b: ${listofdogbreeds}" data-th-value="${b.name}" data-th-text="${b.name}" th:field="*{breed}" aria-describedby="breedHelp" > </option>
+                <option value="other" class="other">Other</option>
                 </select>
+                <div id="breedHelp" class="form-text">Please choose 'other' if breed not found</div>
+            </div>
                 </div>
                 <div class="col">
                     <label for="dateOfBirth" class="form-label">Pet's Gender</label>

@@ -44,13 +44,12 @@ public class WeatherService {
         for(JsonValue jsonValue: jsonArray){ 
             JsonObject jsonObject = jsonValue.asJsonObject();
             JsonArray jsonForecast = jsonObject.getJsonArray("forecasts");
-            // System.out.println("jsonForecast" + jsonForecast);
+            
             for(JsonValue jsonValue1 : jsonForecast){
                 JsonObject jsonArea = jsonValue1.asJsonObject();
                 String area = jsonArea.getString("area");
                 String forecast = jsonArea.getString("forecast");
-                // System.out.println("json area: " + area);
-                // System.out.println("forecast in area" + forecast);
+                
 
                 Weather weather = new Weather(); 
                 weather.setArea(area);

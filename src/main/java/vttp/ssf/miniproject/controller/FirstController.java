@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +17,7 @@ import vttp.ssf.miniproject.model.Pet;
 import vttp.ssf.miniproject.model.Weather;
 import vttp.ssf.miniproject.service.HealthappService;
 import vttp.ssf.miniproject.service.WeatherService;
+import vttp.ssf.miniproject.service.petImageService;
 
 @Controller
 @RequestMapping("/")
@@ -26,13 +26,18 @@ public class FirstController {
     @Autowired
     WeatherService weatherSvc;
 
-    @Autowired HealthappService healthAppSvc; 
+    @Autowired 
+    HealthappService healthAppSvc; 
+
+    @Autowired
+    petImageService petSvc;
    
 
     @GetMapping(path = "/")
     public String homePage(Model m) {
         List<Weather> listOfWeather = weatherSvc.getWeather();
-         
+        
+        
         m.addAttribute("listofweather", listOfWeather);
         
        
@@ -66,6 +71,7 @@ public class FirstController {
         sess.setAttribute("username", name);  //key is username, value is name 
         m.addAttribute("retrievedpets", listOfPets);
         m.addAttribute("pet", newPet);
+        m.addAttribute("username", name);
         return "pageofpets";
     }
 

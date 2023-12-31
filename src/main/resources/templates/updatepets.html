@@ -89,7 +89,7 @@
                     <label for="breed" class="form-label">Breed of dog</label>
                     <select id="breed" name="breed" class="form-select">
                         <option selected>Choose...</option>
-                <option th:each="b: ${listofdogbreeds}" data-th-value="${b}" data-th-text="${b}"> </option>
+                        <option th:each="b: ${listofdogbreeds}" data-th-value="${b.name}" data-th-text="${b.name}"> </option>
                 </select>
                 </div>
                 <div class="col">
@@ -118,8 +118,8 @@
                             placeholder="Enter your comments here"></textarea>
 
                         <br>
-                        <button type="submit" class="btn" formaction="/pets/postInfo"> Update Record </button>
-                        <button type="submit" class="btn" formaction="/pets/postInfo"> Cancel </button>
+                        <button type="submit" class="btn" th:formaction="@{/pets/petsupdated}"> Update Record </button>
+                        <button type="submit" class="btn" th:formaction="@{/pets/cancel}"> Cancel </button>
                         
         </form>
     </div>

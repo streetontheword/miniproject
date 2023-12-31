@@ -3,20 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Individual Pet</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
     <div class = "container" data-th-object="${petrecord}">
         
-        <p data-th-text="${petrecord.name}"></p>
+
+        <img th:src="${petrecord.imageId}" height="350px">
+        <br>
+        <span>Name: </span>
+        <span data-th-text="${petrecord.name}"></span>
+        <br>
+        <span>Date of Birth: </span>
+        <p data-th-text="${#dates.format(petrecord.dateOfBirth, 'yyyy-MM-dd')}"></p>
+    
+        <span>Date of Vaccination: </span>
+        <p data-th-text="${#dates.format(petrecord.dateOfVaccination, 'yyyy-MM-dd')}"></p>
+
+        <span>Date of Next Vaccination: </span>
+        <p data-th-text="${#dates.format(petrecord.dateOfNextVaccination, 'yyyy-MM-dd')}"></p>
+
+        <span>Date of Last Groomed: </span>
+        <p data-th-text="${petrecord.lastGroomedDate}"></p>
+
+        <span>Date of Next Groomed: </span>
+        <p data-th-text="${petrecord.nextGroomedDate}"></p>
+
+        <span>Microchip Number: </span>
         <p data-th-text="${petrecord.microChipNumber}"></p>
+
+        <p data-th-text="${petrecord.age}"></p>
+        <span>Breed: </span>
+        <span data-th-text="${petrecord.breed}"></span>
+        <br>
+        <span>Gender: </span>
+        <span data-th-text="${petrecord.gender}"></span>
+        <br>
+        <span>Allergies: </span>
+        <span data-th-text="${petrecord.allergies}"></span>
+        <br>
+        <span>Comments: </span>
+        <span data-th-text="${petrecord.comments}"></span>
+        <br>
+
         
-
-
-
+        <button class=" btn btn-danger"><a th:href="@{/pets/petdelete/{name}(name=${pet.id})}"> Delete </a></button>
+        <a th:href="@{/pets/petupdate/{name}(name=${pet.id})}" class="btn">Edit</a>
         
+        <!-- <a th:href="@{/pets/{name}(name=${pet.id})}" class="btn">View</a>
+        <a th:href="@{/pets/petupdate/{name}(name=${pet.id})}" class="btn">Edit</a> -->
 
+        <!-- <a th:href="@{/pets/petdelete/{name}(name=${pet.id})}"><button class=" btn btn-danger"> Delete </button> </a> -->
        
 </body>
 </body>

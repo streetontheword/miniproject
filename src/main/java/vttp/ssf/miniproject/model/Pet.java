@@ -1,13 +1,8 @@
 package vttp.ssf.miniproject.model;
 
-import java.io.Serializable;
+
 import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -48,9 +43,13 @@ public class Pet {
 
     private String comments; 
 
+    private String id; 
+
+    private String imageId; 
 
 
-    public Pet(String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, Date dateOfNextVaccination, String lastGroomedDate,String nextGroomedDate,String allergies, String comments) {
+
+    public Pet(String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, Date dateOfNextVaccination, String lastGroomedDate,String nextGroomedDate,String allergies, String comments, String imageId) {
         this.name = name;
         this.microChipNumber = microChipNumber;
         this.dateOfBirth = dateOfBirth;
@@ -62,6 +61,7 @@ public class Pet {
         this.nextGroomedDate = nextGroomedDate;
         this.allergies = allergies;
         this.comments = comments;
+        this.imageId = imageId;
     }
 
 
@@ -155,7 +155,6 @@ public class Pet {
     }
 
 
-    
 
      public Date getDateOfNextVaccination() {
         return dateOfNextVaccination;
@@ -176,6 +175,15 @@ public class Pet {
         this.nextGroomedDate = nextGroomedDate;
     }
 
+    
+    public String getId() {
+        return id;
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
@@ -183,5 +191,18 @@ public class Pet {
                 + ", breed=" + breed + ", age=" + age + ", dateOfVaccination=" + dateOfVaccination
                 + ", lastGroomedDate=" + lastGroomedDate + ", allergies=" + allergies + ", comments=" + comments + "]";
     }
+
+
+    public String getImageId() {
+        return imageId;
+    }
+
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+
+   
     
 }

@@ -5,33 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List Of Pets</title>
     <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-   
+   <div class="container">
     <form data-th-object="${pet}">
-    
-    <h1>Welcome to your pet's health booklet</h1>
-
-    <div data-th-if="${#lists.isEmpty(retrievedpets)}">
-            <p>Oh no! Your Pet's health booklet is empty</p>
-			<p>Please click <a th:href="@{/pets/add}">here </a> to start your furkid's entry</p>
+   <div class="containerwithnoentry">
+        <div data-th-if="${#lists.isEmpty(retrievedpets)}">
+            <h1>Welcome, you must be new! </h1>
+            <h2>Pssst, your Pet's health booklet is empty!</h3>
+    <div class="no-entry-box">
+			<ul>
+                <li><p><a th:href="@{/pets/add}">+</a></p>
+                </li>
+            </ul>
+        </div>
     </div>
+   </div>
 
     <div class="containerwithentry">
 	<div data-th-if="${not#lists.isEmpty(retrievedpets)}">
-            <p>Welcome back!</p>
-            <p>Please click <a th:href="@{/pets/add}">here </a> to add another furkid entry</p>
-			<ul data-th-each="pet: ${retrievedpets}">
-                <li><span data-th-text="${pet.name}"></span>
+            <h2 class="heading">Welcome back to Pet Buddy! Here are your pets!</h2>
+            
+           
+
+
+          <div class="box-container">
+            <ul data-th-each="pet: ${retrievedpets}">
+                    
+                <li> <img th:src="${pet.imageId}" height="350px"><h3 data-th-text="${pet.name}"></h3>
+                    <a th:href="@{/pets/{name}(name=${pet.id})}" class="btn">View</a>
                     <br>
-                    <a th:href="@{/pets/petupdate/{name}(name=${pet.name})}" class="btn btn-primary">Edit</a>
-                    <a th:href="@{/pets/petdelete/{name}(name=${pet.name})}" class="btn btn-danger"> Delete </a></li>
+                    <!-- <a th:href="@{/pets/{name}(name=${pet.id})}" class="btn">View</a>
+                    <a th:href="@{/pets/petupdate/{name}(name=${pet.id})}" class="btn">Edit</a> -->
+                    <button class=" btn btn-danger"><a th:href="@{/pets/petdelete/{name}(name=${pet.id})}"> Delete </a></button>
+                    </li>
+                    
             </ul>
+            <ul><li><p><a th:href="@{/pets/add}">+</p></a></li></ul>
+            
+          </div>
+          <ul><li><p><a th:href="@{/getJson/{username}(username=${username})}">Get Pet's Id</a></p></li></ul>
 		</div>
     </div>
-
-
-
-    </form>
+ </form>
+</div>
 </body>
 </html>
