@@ -109,7 +109,7 @@ public class petImageService {
         for (JsonValue jsonValue : jsonArray) {
             JsonObject jsonObj = jsonValue.asJsonObject();
             String breedName = jsonObj.getString("name");
-            String refId = jsonObj.getString("reference_image_id");
+            String refId = jsonObj.getString("reference_image_id", "null");
             Cat cat = new Cat();
             cat.setName(breedName);
             cat.setImageId(refId);
@@ -119,7 +119,28 @@ public class petImageService {
 
         }
         return listOfCat;
+    }
 
+    public String getCatImage(Pet pet) {
+        String breed = pet.getBreed();
+        if (breed.equals("other")) {
+            return "https://img.freepik.com/free-vector/concept-cute-different-pets_23-2148545213.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1703808000&semt=ais";
+
+        }
+        String imageId = catMap.get(breed).getImageId();
+        String callThisUrl = url_cat_image + imageId;
+        RequestEntity<Void> req = RequestEntity.get(callThisUrl).build();
+        ResponseEntity<String> response = template.exchange(req, String.class);
+        String apiPaylod = response.getBody();
+        JsonReader jsonReader = Json.createReader(new StringReader(apiPaylod));
+        JsonObject jsonObject = jsonReader.readObject();
+        String urlForImage = jsonObject.getString("url");
+        pet.setImageId(urlForImage);
+        // pet.setImageId(urlForImage);
+        return urlForImage;
+    }
+
+  
         // how to get the images?
         // public String getImageUrl(List<Dog> dogList) {
         // List<String> allUrl = new ArrayList<>();
@@ -141,28 +162,8 @@ public class petImageService {
         // return "";
         // }
 
-    }
+    
 
-    public String getCatImageId(Pet pet) {
-        String breed = pet.getBreed();
-        String imageId = catMap.get(breed).getImageId();
-        String callThisUrl = url_cat_image + imageId;
-        RequestEntity<Void> req = RequestEntity.get(callThisUrl).build();
-        ResponseEntity<String> response = template.exchange(req, String.class);
-        String apiPaylod = response.getBody();
-        JsonReader jsonReader = Json.createReader(new StringReader(apiPaylod));
-        JsonObject jsonObject = jsonReader.readObject();
-        String url = jsonObject.getString("url");
-        System.out.println("hello>>>>>" + url);
-
-        return "";
-
-
-    //     pet.setImageId(jsonObject.getString("url",
-    //             "https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"));
-    //   System.out.println(imageId);
-    //         return imageId;
-       
-    }
+    
 
 }
