@@ -7,11 +7,14 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-    <form method="GET">
+    <form method="POST" th:action="@{/pets/pet}">
+        <button type="submit"  name="breed" th:value="cat"> Cat </button>
+        </form>
 
-        <button type="submit" class="btn" formaction="/pets/cat"> Cat </button>
-        <button type="submit" class="btn" formaction="/pets/dog"> Dog </button>
 
-    </form>
+        <form method="POST" th:action="@{/pets/pet}">
+            <button type="submit" name="breed" th:value="dog"> Dog </button>
+          </form>
+    
 </body>
 </html>
