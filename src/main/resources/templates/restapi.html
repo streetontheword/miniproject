@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Api</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body class="picture">
+   
+
+    <div class="api">
+    <h1>API for developers</h1>
+    <p>How to use REST API?</p>
+    </div>
+    
+    <div class="instruction">
+
+    <p>To extract an individual user's IPPT data, replace {username} with the username of the user you want to access.</p>
+
+    <p >E.g: https://petbuddy-production.up.railway.app/getJson/{username}</p>
+
+    <button class="btn"><a th:href="@{/getJson/{username}(username=${username})}" style="color: inherit; text-decoration: none;">Rest API</a></button>
+    <button class="btn"><a th:href="@{/pets/back}" style="color: inherit; text-decoration: none;">Back</a></button> 
+</div>
+</body>
+</html>

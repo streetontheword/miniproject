@@ -6,56 +6,85 @@
     <title>Individual Pet</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
-<body>
-    <div class = "container" data-th-object="${petrecord}">
+<body class="pet">
+
+    <div class="logo">
+        <img th:src="@{/images/pawprints.jpeg}" width="120px" height="80px" alt="Logo">
+    </div> 
+
+    <div class="indivpets" th:object="${pet}">
+
+
+    <h1 data-th-text="${pet.name}" ></h1>
+    
+    
+        <div class="petimage">
+        <img th:src="${pet.imageId}" width="400px" height="300px">
+        <br>
         
 
-        <img th:src="${petrecord.imageId}" height="350px">
-        <br>
+    <div class="details">
+        <div class="name">
         <span>Name: </span>
-        <span data-th-text="${petrecord.name}"></span>
+        <span data-th-text="${pet.name}"></span>
         <br>
+        </div>
         <span>Date of Birth: </span>
-        <p data-th-text="${#dates.format(petrecord.dateOfBirth, 'yyyy-MM-dd')}"></p>
-    
+        <span data-th-text="${#dates.format(pet.dateOfBirth, 'yyyy-MM-dd')}"></span>
+        <br>    
+
         <span>Date of Vaccination: </span>
-        <p data-th-text="${#dates.format(petrecord.dateOfVaccination, 'yyyy-MM-dd')}"></p>
+        <span data-th-text="${#dates.format(pet.dateOfVaccination, 'yyyy-MM-dd')}"></span>
+        <br>
 
         <span>Date of Next Vaccination: </span>
-        <p data-th-text="${#dates.format(petrecord.dateOfNextVaccination, 'yyyy-MM-dd')}"></p>
+        <span data-th-text="${#dates.format(pet.dateOfNextVaccination, 'yyyy-MM-dd')}"></span>
+        <br>
 
         <span>Date of Last Groomed: </span>
-        <p data-th-text="${petrecord.lastGroomedDate}"></p>
+        <span data-th-text="${pet.lastGroomedDate}"></span>
+        <br>
 
         <span>Date of Next Groomed: </span>
-        <p data-th-text="${petrecord.nextGroomedDate}"></p>
+        <span data-th-text="${pet.nextGroomedDate}"></span>
+        <br>
 
         <span>Microchip Number: </span>
-        <p data-th-text="${petrecord.microChipNumber}"></p>
+        <span data-th-text="${pet.microChipNumber}"></span>
+        <br>
 
-        <p data-th-text="${petrecord.age}"></p>
+        <span>Age: </span>
+        <span data-th-text="${pet.age}"></span>
+        <br>
+
         <span>Breed: </span>
-        <span data-th-text="${petrecord.breed}"></span>
+        <span data-th-text="${pet.breed}"></span>
         <br>
+
         <span>Gender: </span>
-        <span data-th-text="${petrecord.gender}"></span>
+        <span data-th-text="${pet.gender}"></span>
         <br>
+
         <span>Allergies: </span>
-        <span data-th-text="${petrecord.allergies}"></span>
+        <span data-th-text="${pet.allergies}"></span>
         <br>
+
         <span>Comments: </span>
-        <span data-th-text="${petrecord.comments}"></span>
+        <span data-th-text="${pet.comments}"></span>
+        <br>
+
+        <span>Species: </span>
+        <span data-th-text="${pet.species}"></span>
         <br>
 
         
-        <button class=" btn btn-danger"><a th:href="@{/pets/petdelete/{name}(name=${petrecord.id})}"> Delete </a></button>
-        <a th:href="@{/pets/petupdate/{name}(name=${petrecord.id})}" class="btn">Edit</a>
-
-        <!-- <a th:href="@{/pets/{name}(name=${pet.id})}" class="btn">View</a>
-        <a th:href="@{/pets/petupdate/{name}(name=${pet.id})}" class="btn">Edit</a> -->
-
-        <!-- <a th:href="@{/pets/petdelete/{name}(name=${pet.id})}"><button class=" btn btn-danger"> Delete </button> </a> -->
-       
+        <button class="btn"><a th:href="@{/pets/petdelete/{name}(name=${pet.id})}" style="color: inherit; text-decoration: none;"> Delete </a></button>
+       <button class="btn"><a th:href="@{/pets/petupdate/{name}(name=${pet.id})}" style="color: inherit; text-decoration: none;">Edit</a></button> 
+       <button class="btn"><a th:href="@{/pets/back}" style="color: inherit; text-decoration: none;">Back</a></button> 
+      
+   </div> 
+</div> 
+</div>  
 </body>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package vttp.ssf.miniproject.controller;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ import vttp.ssf.miniproject.model.Cat;
 import vttp.ssf.miniproject.model.Dog;
 import vttp.ssf.miniproject.model.Pet;
 import vttp.ssf.miniproject.model.Weather;
-// import vttp.ssf.miniproject.service.DogService;
 import vttp.ssf.miniproject.service.HealthappService;
 import vttp.ssf.miniproject.service.WeatherService;
 import vttp.ssf.miniproject.service.petImageService;
@@ -30,8 +29,7 @@ import vttp.ssf.miniproject.service.petImageService;
 @RequestMapping(path = "/pets")
 public class PetController {
 
-    // @Autowired
-    // DogService dogSvc;
+  
     @Autowired
     WeatherService weatherSvc; 
 
@@ -41,19 +39,9 @@ public class PetController {
     @Autowired
     petImageService petSvc;
 
-    // later
-    // do after person login
+   
     @GetMapping("/add")
     public String getPets(Model m) {
-        // Pet pet = new Pet();
-        // // List<String> dogBreeds = dogSvc.getDogBreeds();
-
-        // List<Dog> listOfDogs = petSvc.getDogBreeds();
-        // List<Cat> listOfCat = petSvc.getCatBreeds();
-        // m.addAttribute("pet", pet);
-        // m.addAttribute("listofdogbreeds", listOfDogs);
-        // m.addAttribute("listofcatbreeds", listOfCat);
-
         return "catordog";
     }
 
@@ -104,75 +92,39 @@ public class PetController {
         String breed = (String) sess.getAttribute("breed");
         if (breed.equals("dog")) {
             pet.setImageId(petSvc.getImageId(pet));
+            pet.setSpecies(breed);
             healthAppSvc.savePets(humanName, petId, pet);
             m.addAttribute("pet", pet);
-            sess.setAttribute("breed", breed);
+            // sess.setAttribute("breed", breed);
+            
             return "redirect:/pets?name=" + humanName;
 
         } else if (breed.equals("cat")) {
             pet.setImageId(petSvc.getCatImage(pet));
+            pet.setSpecies(breed);
             healthAppSvc.savePets(humanName, petId, pet);
-            sess.setAttribute("breed", breed);
+            // sess.setAttribute("breed", breed);
             m.addAttribute("pet", pet);
 
         }
-        return "redirect:/pets?name=" + humanName;
-        // petSvc.getImageId(pet);
-        // pet.setImageId(petSvc.getImageId(pet));
-        // pet.setImageId(petSvc.getCatImage(pet));
-        // healthAppSvc.savePets(humanName, petId, pet);
-        // System.out.println("postInfo " + petId);
-
-        // m.addAttribute("pet", pet);
-
-        // return "redirect:/pets?name=" + humanName;
+       return "redirect:/pets?name=" + humanName;
+      
     }
 
-    // @GetMapping("/dog")
-    // public String getDog(Model m) {
-    // Pet pet = new Pet();
-    // List<Dog> listOfDogs = petSvc.getDogBreeds();
-    // m.addAttribute("listofdogbreeds", listOfDogs);
-    // m.addAttribute("pet", pet);
-    // return "petinfo";
-    // }
-
-    // @PostMapping("/postInfoDog")
-    // public String postAddedInfoDog(@Valid @ModelAttribute Pet pet, BindingResult
-    // result, HttpSession sess, Model m) {
-    // if (result.hasErrors()) {
-    // m.addAttribute("pet", pet);
-    // List<Dog> listOfDogs = petSvc.getDogBreeds();
-
-    // m.addAttribute("listofdogbreeds", listOfDogs);
-    // return "petinfo";
-
-    // }
-    // String humanName = (String) sess.getAttribute("username");
-    // String petId = healthAppSvc.getRandomHexString(8);
-    // pet.setId(petId);
-    // // petSvc.getImageId(pet);
-    // pet.setImageId(petSvc.getImageId(pet));
-    // // pet.setImageId(petSvc.getCatImage(pet));
-    // healthAppSvc.savePets(humanName, petId, pet);
-    // System.out.println("postInfo " + petId);
-
-    // m.addAttribute("pet", pet);
-
-    // return "redirect:/pets?name=" + humanName;
-
-    // }
+    
 
     @GetMapping("/{name}")
     public String retrieveIndividualPets(@PathVariable("name") String name, HttpSession sess, Model m) {
-        Pet pet = new Pet();
-        m.addAttribute("pet", pet);
+        // Pet pet = new Pet();
+        // m.addAttribute("pet", pet);
         String humanName = (String) sess.getAttribute("username");
-        String breed = (String) sess.getAttribute("breed");
-        System.out.println("IS THIS A CAT OR A DOG : " + breed);
-        m.addAttribute("petrecord", healthAppSvc.getIndividualPet(humanName, name));
+        Pet pet = (Pet) healthAppSvc.getIndividualPet(humanName,name);
+        m.addAttribute("pet", pet);
+        // m.addAttribute("petrecord", healthAppSvc.getIndividualPet(humanName, name));
+        m.addAttribute("username", name);
         return "individualpets";
     }
+
 
     @GetMapping("/petdelete/{name}")
     public String deletePetEntry(@PathVariable("name") String name, HttpSession sess) {
@@ -187,17 +139,18 @@ public class PetController {
     public String updateEntryforDogs(@PathVariable("name") String name, Model m, HttpSession sess) {
         String humanName = (String) sess.getAttribute("username");
         Pet pet = healthAppSvc.getIndividualPet(humanName, name);
-        String breed = (String) sess.getAttribute("breed");
-        System.out.println(breed);
+        String breed = pet.getSpecies(); 
         if (breed.equals("dog")) {
             List<Dog> listOfDogs = petSvc.getDogBreeds();
             sess.setAttribute("petid", pet.getId());
+            sess.setAttribute("breed", breed);
             m.addAttribute("pet", pet);
             m.addAttribute("listofbreeds", listOfDogs);
             return "updatepets";
         } else if (breed.equals("cat")) {
             List<Cat> listOfCats = petSvc.getCatBreeds();
             sess.setAttribute("petid", pet.getId());
+            sess.setAttribute("breed", breed);
             m.addAttribute("pet", pet);
             m.addAttribute("listofbreeds", listOfCats);
         }
@@ -209,6 +162,7 @@ public class PetController {
     @PostMapping("/petsupdated")
     public String updated(@Valid @ModelAttribute Pet pet, BindingResult result, HttpSession sess, Model m) {
 
+       
         if (result.hasErrors()) {
             String breed = (String) sess.getAttribute("breed");
             if (breed.equals("dog")) {
@@ -222,47 +176,25 @@ public class PetController {
         }
 
         String petId = (String) sess.getAttribute("petid");
-        String breed = (String) sess.getAttribute("breed");
         pet.setId(petId);
         String humanName = (String) sess.getAttribute("username");
+        String breed = (String) sess.getAttribute("breed");
+        System.out.println("breed of updated" + breed);
 
         if (breed.equals("dog")){
             pet.setImageId(petSvc.getImageId(pet));
+            pet.setSpecies(breed);
             healthAppSvc.savePets(humanName, petId, pet);
             m.addAttribute("pet", pet);
             return "redirect:/pets?name=" + humanName;
         } else if (breed.equals("cat")){
             pet.setImageId(petSvc.getCatImage(pet));
+            pet.setSpecies(breed);
             healthAppSvc.savePets(humanName, petId, pet);
             m.addAttribute("pet", pet);
             
         }
         return "redirect:/pets?name=" + humanName;
-
-        // pet.setImageId(petSvc.getImageId(pet));
-        // healthAppSvc.savePets(humanName, petId, pet);
-        
-        // m.addAttribute("pet", pet);
-        // return "redirect:/pets?name=" + humanName;
-
-        // if (result.hasErrors()) {
-        //     m.addAttribute("pet", pet);
-        //     List<Dog> listOfDogs = petSvc.getDogBreeds();
-        //     m.addAttribute("listofdogbreeds", listOfDogs);
-        //     return "updatepets";
-        // }
-
-        // String petId = (String) sess.getAttribute("petid");
-        // pet.setId(petId);
-        // String humanName = (String) sess.getAttribute("username");
-        // petSvc.getImageId(pet);
-        // pet.setImageId(petSvc.getImageId(pet));
-        // healthAppSvc.savePets(humanName, petId, pet);
-
-        // System.out.println("petsupdated: " + pet.getId());
-        // m.addAttribute("pet", pet);
-
-        // return "redirect:/pets?name=" + humanName;
     }
 
     @PostMapping(path = "/cancel")
@@ -271,6 +203,14 @@ public class PetController {
         String humanName = (String) sess.getAttribute("username");
         return "redirect:/pets?name=" + humanName;
     }
+
+    @GetMapping(path="/back")
+        public String back(HttpSession sess){
+             String humanName = (String) sess.getAttribute("username");
+        return "redirect:/pets?name=" + humanName;
+
+    }
+    
 
     @PostMapping(path="/bye")
     public String logout(HttpSession sess, Model m){
@@ -281,4 +221,6 @@ public class PetController {
         return "redirect:/";
 
     }
+
+
 }

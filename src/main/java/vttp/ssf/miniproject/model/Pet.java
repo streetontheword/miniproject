@@ -3,6 +3,8 @@ package vttp.ssf.miniproject.model;
 
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -14,25 +16,27 @@ public class Pet {
     @Size(min = 3, max = 30, message = "Name must be between 3 to 30 characters")
     private String name;
 
-    @Size(max =15, message = "number exceeded 15 characters")
+    @Size(min=10, max =15, message = "Please enter 10-15 numbers")
     private String microChipNumber;
 
     @Past(message = "Birth date must be a past date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
+    
     private String gender; 
 
    
     private String breed;
 
+    @Min(value = 0, message = "Number must be non-negative")
     private Integer age;
 
-    @Past(message = "Birth date must be a past date")
+    @Past(message = "Vaccination date must be a past date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfVaccination;
 
-     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfNextVaccination;
 
     private String lastGroomedDate;
@@ -47,9 +51,11 @@ public class Pet {
 
     private String imageId; 
 
+    private String species; 
 
 
-    public Pet(String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, Date dateOfNextVaccination, String lastGroomedDate,String nextGroomedDate,String allergies, String comments, String imageId) {
+
+    public Pet(String name, String microChipNumber, Date dateOfBirth, String breed, Integer age, Date dateOfVaccination, Date dateOfNextVaccination, String lastGroomedDate,String nextGroomedDate,String allergies, String comments, String imageId, String species) {
         this.name = name;
         this.microChipNumber = microChipNumber;
         this.dateOfBirth = dateOfBirth;
@@ -62,12 +68,14 @@ public class Pet {
         this.allergies = allergies;
         this.comments = comments;
         this.imageId = imageId;
+        this.species = species; 
     }
 
 
     public Pet() {
     }
 
+    
     
     public Pet(String comments) {
         this.comments = comments;
@@ -200,6 +208,16 @@ public class Pet {
 
     public void setImageId(String imageId) {
         this.imageId = imageId;
+    }
+
+
+    public String getSpecies() {
+        return species;
+    }
+
+
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
 

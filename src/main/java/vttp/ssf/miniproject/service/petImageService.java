@@ -57,8 +57,7 @@ public class petImageService {
     public String getImageId(Pet pet) {
         String breed = pet.getBreed();
         if (breed.equals("other")) {
-            return "https://img.freepik.com/free-vector/concept-cute-different-pets_23-2148545213.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1703808000&semt=ais";
-
+            return "https://assets.materialup.com/uploads/2e791a32-44bc-43f3-aab4-c8b801465549/preview.jpg";
         }
         String imageId = DogMap.get(breed).getImageId();
         String callThisUrl = url_dog_image + imageId;
@@ -114,7 +113,7 @@ public class petImageService {
             cat.setName(breedName);
             cat.setImageId(refId);
             listOfCat.add(cat);
-            System.out.println(cat);
+           
             catMap.put(breedName, cat);
 
         }

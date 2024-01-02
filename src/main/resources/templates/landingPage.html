@@ -10,7 +10,10 @@
 </head>
 
 <body class="landing-page">
-    
+
+   
+   
+    <img th:src="@{/images/pawprints.jpeg}" width="120px" height="80px" alt="Logo">
     <div class="weather">
         <form method="POST">
             <div class="mb-3">
@@ -23,16 +26,13 @@
                         data-th-text="${w.area}" th:selected="${#strings.equals(lastselected, w.area)}">
                     </option>
                 </select>
-                
             </div>
 
             <button type="submit" class="btn" formaction="/weather"> Click here to find out!</button>
-
-            <div class="weather-result">
-
+            <br>
                 <label for="forecast">Forecast for the next 2 hours:</label>
                 <span data-th-text="${forecast}"></span>
-            </div>
+            
         </form>
     </div>
     
@@ -43,9 +43,12 @@
                 <input type="text" name="name" placeholder="Your name" required>
                 <i class='bx bxs-user'></i>
             </div>
-            <button type="submit" class="btn" formaction="/pets"> Login </button>
+            <button type="submit" class="btn" th:formaction="@{/pets}"> Let's start </button>
         </form>
     </div>
+    <div class="credit">
+    <span><button class="btn"><a th:href="@{/credits}" style="color: inherit; text-decoration: none;">Credits</a>  </button></span>
+</div>
 </body>
 
 </html>

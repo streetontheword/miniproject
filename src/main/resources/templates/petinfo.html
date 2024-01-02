@@ -11,30 +11,38 @@
 </head>
 
 <body>
+
+   
+    
+    <div class="logo">
+        <img th:src="@{/images/pawprints.jpeg}" width="120px" height="80px" alt="Logo">
+    </div>  
+
     <div class="petform">
-        <h1> Pet's Health Booklet </h1>
+       <h1>Pet's Health Booklet</h1>
         <form method="POST" th:object="${pet}">
 
         <div class="row">
             <div class="col">
                 <label for="name" class="form-label">Pet's Name</label>
                 <input type="text" class="form-control" name="name" th:field="*{name}" placeholder="First name"
-                    aria-label="First name">
+                    aria-label="First name" >
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                
             </div>
             <div class="col">
                 <label for="dateOfBirth" class="form-label">Pet's Date Of Birth</label>
                 <input type="date" class="form-control" name="dateOfBirth" th:field="*{dateOfBirth}"
                     aria-describedby="dateOfBirthHelp" />
+                <div id="dateOfBirthHelp" class="form-text">Please enter a past date</div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></div>
             </div>
             </div>
             <br>
             <div class="row">
             <div class="col">
                 <label for="name" class="form-label">Last Vaccination Date</label>
-                <input type="date" class="form-control" name="dateOfVaccination" th:field="*{dateOfVaccination}"
-                    aria-describedby="dateOfVaccinationHelp" />
-                <div id="dateOfVaccinationHelp" class="form-text">Please enter a past date</div>
+                <input type="date" class="form-control" name="dateOfVaccination" th:field="*{dateOfVaccination}" />
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('dateOfVaccination')}"
                     th:errors="*{dateOfVaccination}"></div>
             </div>
@@ -45,7 +53,6 @@
                     <div id="thumbwrap">
                         <a class="thumb" >Suggested Vaccination Timeline<span><img src="/images/vaccinationpicture.jpg" width="400" height="300" alt="timeline of vaccination"></span></a>
                 </div>
-                <div id="dateOfNextVaccinationHelp" class="form-text">Please enter a future date</div>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('dateOfNextVaccination')}"
                     th:errors="*{dateOfNextVaccination}"></div>
             </div>
@@ -64,7 +71,7 @@
                 <label for="nextGroomedDate" class="form-label">Next Grooming Session</label>
                 <input type="text" class="form-control" name="nextGroomedDate" th:field="*{nextGroomedDate}"
                     aria-describedby="nextGroomedDateHelp" />
-                <div id="nextGroomedDateHelp" class="form-text">When was your furkid's last grooming session?
+                <div id="nextGroomedDateHelp" class="form-text">When is your furkid's next grooming session?
                 </div>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('nextGroomedDate')}"
                     th:errors="*{nextGroomedDate}"></div>
@@ -81,9 +88,7 @@
             </div>
             <div class="col">
                 <label for="dateOfBirth" class="form-label">Pet's age</label>
-                <input type="number" class="form-control" name="age" th:field="*{age}"
-                    aria-describedby="ageHelp" />
-                <div id="ageHelp" class="form-text">Please indicate with M for months</div>
+                <input type="number" class="form-control" name="age" th:field="*{age}" />
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">
                 </div>
             </div>
@@ -104,7 +109,7 @@
                     <label for="dateOfBirth" class="form-label">Pet's Gender</label>
                     <input type="text" class="form-control" name="gender" th:field="*{gender}"
                         aria-describedby="genderHelp" />
-                    <div id="genderHelp" class="form-text">please enter your furkid's gender</div>
+                    <div id="genderHelp" class="form-text">Please enter your furkid's gender</div>
                     <div class="alert alert-danger" th:if="${#fields.hasErrors('gender')}"
                         th:errors="*{gender}"></div>
                 </div>
@@ -123,7 +128,8 @@
                     <div class="commentbox">
                         <label for="comments">Comments:</label>
                         <textarea id="comments" name="comments" rows="4" cols="50" th:field="*{comments}" 
-                            placeholder="Enter your comments here"></textarea>
+                            placeholder="Enter your comments here" aria-describedby="commentHelp" ></textarea>
+                        <div id="commentHelp" class="form-text">Any additional medications or important dates?</div>
 
                         <br>
                         <button type="submit" class="btn" formaction="/pets/postInfo"> Save Record </button>

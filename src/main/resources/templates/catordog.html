@@ -7,14 +7,29 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+
+   
+ 
+    <div class="logo">
+        <img th:src="@{/images/pawprints.jpeg}" width="120px" height="80px" alt="Logo">
+    </div> 
+
+    <div class="catordog">
+    <h1>Please choose one</h1>
+
+    <div class = "flex-parent jc-center"> 
     <form method="POST" th:action="@{/pets/pet}">
-        <button type="submit"  name="breed" th:value="cat"> Cat </button>
-        </form>
-
-
-        <form method="POST" th:action="@{/pets/pet}">
-            <button type="submit" name="breed" th:value="dog"> Dog </button>
+         <button type="submit" class="btn"  name="breed" th:value="dog"> Dog </button>
           </form>
-    
+
+    <form method="POST" th:action="@{/pets/pet}">
+        <button type="submit"  class="btn" name="breed" th:value="cat"> Cat </button>
+        </form>
+       
+        </div>
+          <img th:src="@{/images/second.jpeg}" alt ="catordog">    
+
+          
+    </div>
 </body>
 </html>

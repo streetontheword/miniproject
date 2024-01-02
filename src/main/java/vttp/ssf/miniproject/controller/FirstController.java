@@ -26,28 +26,25 @@ public class FirstController {
     @Autowired
     WeatherService weatherSvc;
 
-    @Autowired 
-    HealthappService healthAppSvc; 
+    @Autowired
+    HealthappService healthAppSvc;
 
     @Autowired
     petImageService petSvc;
-   
 
     @GetMapping(path = "/")
     public String homePage(Model m) {
         List<Weather> listOfWeather = weatherSvc.getWeather();
-        
-        
+
         m.addAttribute("listofweather", listOfWeather);
-        
-       
+
         return "landingpage";
     }
 
-    //to give weather
+    // to give weather
     @PostMapping("/weather")
-    public String getForecast(@RequestBody MultiValueMap<String, String> body,  Model m) {
-        //System.out.println(body);
+    public String getForecast(@RequestBody MultiValueMap<String, String> body, Model m) {
+        // System.out.println(body);
         // body.getFirst("area");
 
         String weather = body.getFirst("area");
@@ -56,25 +53,33 @@ public class FirstController {
         List<Weather> listOfWeather = weatherSvc.getWeather();
         m.addAttribute("forecast", weather);
         m.addAttribute("listofweather", listOfWeather);
-       
 
         return "landingpage";
     }
 
-    //@PostMapping path variables 
 
-    @GetMapping(path="/pets")
-    public String getPets(@RequestParam String name, Model m, HttpSession sess){
-        //System.out.println(body);
-        Pet newPet = new Pet(); 
+    @GetMapping(path = "/pets")
+    public String getPets(@RequestParam String name, Model m, HttpSession sess) {
+        // System.out.println(body);
+        Pet newPet = new Pet();
         List<Pet> listOfPets = healthAppSvc.getPets(name);
-        sess.setAttribute("username", name);  //key is username, value is name 
+        sess.setAttribute("username", name); // key is username, value is name
         m.addAttribute("retrievedpets", listOfPets);
         m.addAttribute("pet", newPet);
         m.addAttribute("username", name);
         return "pageofpets";
     }
 
+    @GetMapping(path="/Api")
+    public String getApi(HttpSession sess, Model m){
+        String humanName = (String) sess.getAttribute("username");
+        m.addAttribute("username", humanName);
 
-
+        return "restapi";
+    }
+    
+    @GetMapping(path="/credits")
+    public String getCredits(){
+        return "credit";
+    }
 }
